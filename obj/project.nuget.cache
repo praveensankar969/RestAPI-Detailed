@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pfKlkBYITM6U0Va7uRnMf3WGX933KdlNfs/9IY0idnrN6PByQoGgrygs2+d6n6jcgPvEhY/xl6nLC9aZwiZsrA==",
+  "dgSpecHash": "N+WbtEvQC84jHL/wCf7fJeHI8XA4ZlJyWLtcYSWyuYmi2VwyyiNDGFSEaqKdjZu42SAOt/I3bJfpvKQ3MaFAAw==",
   "success": true,
-  "projectFilePath": "C:\\D\\Work\\Dotnet\\WebAPI\\API\\API.csproj",
+  "projectFilePath": "C:\\D\\Work\\Dotnet\\WebAPI\\RestAPI-Detailed\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sanka\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\sanka\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

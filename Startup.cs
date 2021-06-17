@@ -34,8 +34,8 @@ namespace API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
             services.AddDbContext<DataContext>(options=>{
-               // options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
-               options.UseSqlite("Data Source=ActionData.db");
+                options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
+               
             });
         }
 

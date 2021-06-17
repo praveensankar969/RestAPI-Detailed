@@ -1261,11 +1261,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\D\\Work\\Dotnet\\WebAPI\\API\\API.csproj",
+      "projectUniqueName": "C:\\D\\Work\\Dotnet\\WebAPI\\RestAPI-Detailed\\API.csproj",
       "projectName": "API",
-      "projectPath": "c:\\D\\Work\\Dotnet\\WebAPI\\API\\API.csproj",
+      "projectPath": "C:\\D\\Work\\Dotnet\\WebAPI\\RestAPI-Detailed\\API.csproj",
       "packagesPath": "C:\\Users\\sanka\\.nuget\\packages\\",
-      "outputPath": "c:\\D\\Work\\Dotnet\\WebAPI\\API\\obj\\",
+      "outputPath": "C:\\D\\Work\\Dotnet\\WebAPI\\RestAPI-Detailed\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sanka\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1329,7 +1329,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
