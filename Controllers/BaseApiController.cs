@@ -3,7 +3,6 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using Persistence;
 using API.DTO;
 
 namespace API.Controllers{
