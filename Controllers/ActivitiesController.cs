@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using API.DTO;
 using System;
+using Microsoft.AspNetCore.Identity;
+using RestAPI_Detailed.DTO;
 
 namespace API.Controllers{
     public class ActivitiesController :BaseApiController{
@@ -13,10 +15,12 @@ namespace API.Controllers{
         public ActivitiesController(DataContext context)
         {
             this.context = context;
+        
         }
 
        [HttpGet]
        public async Task<ActionResult<IEnumerable<Activity>>> GetAllActivities(){
+           
            return await context.Activities.ToListAsync();
        }
 
