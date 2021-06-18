@@ -8,6 +8,7 @@
 /bazel-out
 /bin
 /obj
+/net5.0
 
 # dependencies
 /node_modules
