@@ -15,6 +15,7 @@ namespace API.DTO
         public string Venue {get; set;}
 
         public string HostName {get; set;}
+        public bool IsCancelled {get; set;}
 
         public ICollection<Profile> Attendees {get; set;}
 

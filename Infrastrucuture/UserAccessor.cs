@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using RestAPI_Detailed.Interfaces;
@@ -16,5 +18,16 @@ namespace RestAPI_Detailed.Infrastrucuture
         {
             return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
         }
+
+        public string GetUserId(){
+            return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+        public Guid GetActivityId(){
+            var guid =  Guid.Parse(_httpContextAccessor.HttpContext?.Request?.RouteValues.SingleOrDefault(x=> x.Key == "id").Value.ToString());
+            return guid;
+        }
+
+
     }
 }
