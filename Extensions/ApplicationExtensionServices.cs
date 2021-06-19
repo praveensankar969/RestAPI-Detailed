@@ -9,6 +9,8 @@ using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using RestAPI_Detailed.Interfaces;
+using RestAPI_Detailed.Infrastrucuture;
 
 namespace API.Extensions
 {
@@ -44,6 +46,7 @@ namespace API.Extensions
             });
 
             services.AddScoped<TokenService>();
+            services.AddScoped<IUserAccessor, UserAccessor>();
 
             return services;
         }

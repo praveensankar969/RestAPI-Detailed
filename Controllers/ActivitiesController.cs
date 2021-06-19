@@ -8,59 +8,79 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using RestAPI_Detailed.DTO;
 using Microsoft.AspNetCore.Authorization;
+using RestAPI_Detailed.Interfaces;
 
-namespace API.Controllers{
-    public class ActivitiesController :BaseApiController{
+namespace API.Controllers
+{
+    public class ActivitiesController : BaseApiController
+    {
         private readonly DataContext context;
+        private readonly IUserAccessor _userAccessor;
 
-        public ActivitiesController(DataContext context)
+        public ActivitiesController(DataContext context, IUserAccessor userAccessor)
         {
+            this._userAccessor = userAccessor;
             this.context = context;
-        
+
         }
 
-       [HttpGet]
-       public async Task<ActionResult<IEnumerable<Activity>>> GetAllActivities(){
-           
-           return await context.Activities.ToListAsync();
-       }
-       
-       [HttpGet("{id}")]
-       public async Task<ActionResult<Activity>> GetAcitivity(Guid id){
-           return await context.Activities.FindAsync(id);
-       } 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Activity>>> GetAllActivities()
+        {
 
-       
-       [HttpPost]
-       public async Task<ActionResult<String>> CreateActivity(Activity activity){
-           context.Activities.Add(activity);
-           await context.SaveChangesAsync();
-           return Ok("Activity added.");
-       }
+            return await context.Activities.Include(x=> x.Attendees).ThenInclude(x=> x.AppUser).ToListAsync();
+        }
 
-       
-       [HttpPut("{id}")] 
-       public async Task<ActionResult<String>> UpdateActivity(Guid id, Activity activity){
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Activity>> GetAcitivity(Guid id)
+        {
+            return await context.Activities.FindAsync(id);
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult<String>> CreateActivity(Activity activity)
+        {
+            var user = await context.Users.FirstOrDefaultAsync(x=> x.UserName == _userAccessor.GetUserName());
+
+            var attendee = new ActivityAttendee{
+                AppUser = user,
+                Activity = activity,
+                IsHost =true
+            };
+            activity.Attendees.Add(attendee);
+            context.Activities.Add(activity);
+            await context.SaveChangesAsync();
+            return Ok("Activity added.");
+        }
+
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<String>> UpdateActivity(Guid id, Activity activity)
+        {
             var act = await context.Activities.FindAsync(id);
-            if(act == null){
+            if (act == null)
+            {
                 return BadRequest("No such activity exists!!");
             }
-            
+
             act.Category = activity.Category ?? act.Category;
             act.City = activity.City ?? act.City;
             act.Date = activity.Date ?? act.Date;
-            act.Description = activity.Description??act.Description;
+            act.Description = activity.Description ?? act.Description;
             act.Title = activity.Title ?? act.Title;
             act.Venue = activity.Venue ?? act.Venue;
             await context.SaveChangesAsync();
             return Ok("Activity Updated");
-       }
+        }
 
-       
-       [HttpDelete("{id}")]
-        public async Task<ActionResult<String>> DeleteActivity(Guid id){
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<String>> DeleteActivity(Guid id)
+        {
             var act = await context.Activities.FindAsync(id);
-            if(act == null){
+            if (act == null)
+            {
                 return BadRequest("No such activity exists!!");
             }
             context.Activities.Remove(act);
