@@ -7,6 +7,7 @@ using API.DTO;
 using System;
 using Microsoft.AspNetCore.Identity;
 using RestAPI_Detailed.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers{
     public class ActivitiesController :BaseApiController{
@@ -23,12 +24,13 @@ namespace API.Controllers{
            
            return await context.Activities.ToListAsync();
        }
-
+       
        [HttpGet("{id}")]
        public async Task<ActionResult<Activity>> GetAcitivity(Guid id){
            return await context.Activities.FindAsync(id);
        } 
 
+       
        [HttpPost]
        public async Task<ActionResult<String>> CreateActivity(Activity activity){
            context.Activities.Add(activity);
@@ -36,6 +38,7 @@ namespace API.Controllers{
            return Ok("Activity added.");
        }
 
+       
        [HttpPut("{id}")] 
        public async Task<ActionResult<String>> UpdateActivity(Guid id, Activity activity){
             var act = await context.Activities.FindAsync(id);
@@ -53,6 +56,7 @@ namespace API.Controllers{
             return Ok("Activity Updated");
        }
 
+       
        [HttpDelete("{id}")]
         public async Task<ActionResult<String>> DeleteActivity(Guid id){
             var act = await context.Activities.FindAsync(id);
