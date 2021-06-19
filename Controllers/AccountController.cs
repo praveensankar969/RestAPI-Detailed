@@ -55,7 +55,7 @@ namespace RestAPI_Detailed.Controllers
 
             var user = new AppUser
             {
-                DispalyName = register.UserName,
+                DisplayName = register.UserName,
                 Email = register.Email,
                 UserName = register.UserName
             };
@@ -84,7 +84,7 @@ namespace RestAPI_Detailed.Controllers
         {
             return new UserDTO
             {
-                DisplayName = user.DispalyName,
+                DisplayName = user.DisplayName,
                 Image = null,
                 UserName = user.UserName,
                 Token = _tokenService.CreateToken(user)

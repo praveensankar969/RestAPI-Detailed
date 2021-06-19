@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using RestAPI_Detailed.DTO;
 using Microsoft.AspNetCore.Authorization;
 using RestAPI_Detailed.Interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace API.Controllers
 {
@@ -16,37 +18,44 @@ namespace API.Controllers
     {
         private readonly DataContext context;
         private readonly IUserAccessor _userAccessor;
+        private readonly IMapper _mapper;
 
-        public ActivitiesController(DataContext context, IUserAccessor userAccessor)
+        public ActivitiesController(DataContext context, IUserAccessor userAccessor, IMapper mapper)
         {
+            this._mapper = mapper;
             this._userAccessor = userAccessor;
             this.context = context;
 
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Activity>>> GetAllActivities()
+        public async Task<ActionResult<IEnumerable<ActivityDTO>>> GetAllActivities()
         {
 
-            return await context.Activities.Include(x=> x.Attendees).ThenInclude(x=> x.AppUser).ToListAsync();
+            var activites = await context.Activities.ProjectTo<ActivityDTO>(_mapper.ConfigurationProvider).ToListAsync();  
+            
+            return activites;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Activity>> GetAcitivity(Guid id)
+        public async Task<ActionResult<ActivityDTO>> GetAcitivity(Guid id)
         {
-            return await context.Activities.FindAsync(id);
+             var activites = await context.Activities.ProjectTo<ActivityDTO>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(x=> x.Id == id);  
+            
+             return activites;
         }
 
 
         [HttpPost]
         public async Task<ActionResult<String>> CreateActivity(Activity activity)
         {
-            var user = await context.Users.FirstOrDefaultAsync(x=> x.UserName == _userAccessor.GetUserName());
+            var user = await context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName());
 
-            var attendee = new ActivityAttendee{
+            var attendee = new ActivityAttendee
+            {
                 AppUser = user,
                 Activity = activity,
-                IsHost =true
+                IsHost = true
             };
             activity.Attendees.Add(attendee);
             context.Activities.Add(activity);
