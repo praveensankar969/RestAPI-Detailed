@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using RestAPI_Detailed.Interfaces;
-using RestAPI_Detailed.Infrastrucuture;
+using RestAPI_Detailed.Infrastructure;
 using RestAPI_Detailed.Core;
 using RestAPI_Detailed.Photos;
 

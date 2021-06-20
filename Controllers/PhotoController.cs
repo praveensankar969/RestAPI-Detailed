@@ -94,6 +94,8 @@ namespace RestAPI_Detailed.Controllers
             }
             photo.IsMain = true;
 
+            user.Photos.Add(photo);
+
             await _context.SaveChangesAsync();
 
             return photo;

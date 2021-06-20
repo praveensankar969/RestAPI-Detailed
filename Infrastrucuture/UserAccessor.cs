@@ -4,7 +4,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using RestAPI_Detailed.Interfaces;
 
-namespace RestAPI_Detailed.Infrastrucuture
+namespace RestAPI_Detailed.Infrastructure
 {
     public class UserAccessor : IUserAccessor
     {

@@ -1,13 +1,10 @@
-using System.Collections.Generic;
-
 namespace RestAPI_Detailed.DTO
 {
-    public class Profile
+    public class AttendeeDTO
     {
-        public string DisplayName {get; set;}
+         public string DisplayName {get; set;}
         public string Bio {get; set;}
         public string UserName {get; set;}
         public string Image {get; set;}
-        public ICollection<Photo> Photos {get;set;}
     }
 }

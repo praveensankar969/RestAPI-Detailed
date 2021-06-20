@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Services;
@@ -27,7 +28,7 @@ namespace RestAPI_Detailed.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO login)
         {
-            var user = await userManager.FindByEmailAsync(login.Email);
+            var user = await userManager.Users.Include(x => x.Photos).FirstOrDefaultAsync(x => x.Email == login.Email);
             if (user == null)
             {
                 return Unauthorized();
@@ -75,7 +76,7 @@ namespace RestAPI_Detailed.Controllers
         public async Task<ActionResult<UserDTO>> GetCurrentUser()
         {
 
-            var user = await userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+            var user = await userManager.Users.Include(x => x.Photos).FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
             return CreateUser(user);
 
         }
@@ -85,7 +86,7 @@ namespace RestAPI_Detailed.Controllers
             return new UserDTO
             {
                 DisplayName = user.DisplayName,
-                Image = null,
+                Image = user.Photos?.FirstOrDefault(x => x.IsMain==true)?.Url,
                 UserName = user.UserName,
                 Token = _tokenService.CreateToken(user)
             };
