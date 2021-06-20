@@ -129,3 +129,6 @@ C:\D\Work\Dotnet\WebAPI\RestAPI-Detailed\bin\Debug\net5.0\Microsoft.IdentityMode
 C:\D\Work\Dotnet\WebAPI\RestAPI-Detailed\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\D\Work\Dotnet\WebAPI\RestAPI-Detailed\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\D\Work\Dotnet\WebAPI\RestAPI-Detailed\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\D\Work\Dotnet\WebAPI\RestAPI-Detailed\bin\Debug\net5.0\CloudinaryDotNet.dll
+C:\D\Work\Dotnet\WebAPI\RestAPI-Detailed\bin\Debug\net5.0\Microsoft.Extensions.WebEncoders.dll
+C:\D\Work\Dotnet\WebAPI\RestAPI-Detailed\bin\Debug\net5.0\Newtonsoft.Json.dll

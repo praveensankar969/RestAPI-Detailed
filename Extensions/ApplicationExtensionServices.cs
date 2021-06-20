@@ -12,6 +12,7 @@ using System.Text;
 using RestAPI_Detailed.Interfaces;
 using RestAPI_Detailed.Infrastrucuture;
 using RestAPI_Detailed.Core;
+using RestAPI_Detailed.Photos;
 
 namespace API.Extensions
 {
@@ -49,7 +50,8 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddScoped<TokenService>();
             services.AddScoped<IUserAccessor, UserAccessor>();
-
+            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+            services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
             return services;
         }
     }
