@@ -264,6 +264,33 @@ namespace API.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("RestAPI_Detailed.DTO.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid?>("ActivityId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("RestAPI_Detailed.DTO.Photo", b =>
                 {
                     b.Property<string>("Id")
@@ -355,6 +382,22 @@ namespace API.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("RestAPI_Detailed.DTO.Comment", b =>
+                {
+                    b.HasOne("API.DTO.Activity", "Activity")
+                        .WithMany("Comments")
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("RestAPI_Detailed.DTO.AppUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
+                    b.Navigation("Activity");
+
+                    b.Navigation("Author");
+                });
+
             modelBuilder.Entity("RestAPI_Detailed.DTO.Photo", b =>
                 {
                     b.HasOne("RestAPI_Detailed.DTO.AppUser", null)
@@ -365,6 +408,8 @@ namespace API.Migrations
             modelBuilder.Entity("API.DTO.Activity", b =>
                 {
                     b.Navigation("Attendees");
+
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("RestAPI_Detailed.DTO.AppUser", b =>
